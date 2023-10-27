@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html  >
+
+<head>
+    <title >Test</title>
+    <script type="application/javascript" src="/webjars/jquery/3.7.1/jquery.js"></script>
+    <script type="application/javascript" src="/jquery.serialize-object.min.js"></script>
+</head>
+
+<body onload="loadEmotions()">
+Formularz wpisywania emocji
+<form id="write_emotion">
+    Opis sytuacji: <input name="description" id="description"><br />
+    Emocje <input name="emotion" type="number" id="emotion"><br />
+    Zachowanie: <input name="behavior" id="behavior"><br/>
+    <input type="button" id="submit-emotion" name="Zapisz" value="Zapisz">
+</form>
+
+<table id="emotion-list" >
+    <thead><tr><td>Id</td><td>Opis</td><td>Reakcja</td><td>Emocje</td></tr></thead>
+    <tbody id="emotion-list-body">
+
+    </tbody>
+</table>
+<script type="application/javascript">
+    $(function (){
+       $('#submit-emotion').click(saveForm);
+    });
+
+    function saveForm(){
+        $.ajax({
+            method: "POST",
+            url: "/api/emotions",
+            contentType: "application/json",
+            dataType: "json",
+            data: $('#write_emotion').serializeJSON(),
+            success: function (data,status) {
+                if(status){
+                    console.log("Success");
+                    console.log(data);
+                    let tbl_row="<tr><td>"+data['id']+"</td><td>"+data['description']+"</td><td>"+data['behavior']+"</td></tr>";
+                    $("emotion-list-body").html($("emotion-list-body").html()+tbl_row);
+                    loadEmotions();
+                }
+            }
+        })
+    }
+
+    loadEmotions();
+
+    function loadEmotions() {
+        $.ajax({
+            method: "GET",
+            url: "/api/emotions",
+            dataType: "json",
+            success: function (data, status) {
+                if (status) {
+                    console.log("Pobrałem dane!");
+                    console.log(data);
+                    var tbl_body=""
+                    $.each(data, function (row) {
+                            let tbl_row = "<tr><td>" + row['id'] + "</td><td>" + row['description'] + "</td><td>" + row['behavior'] + "</td></tr>";
+                           tbl_body= tbl_body+tbl_row;
+                        }
+
+                    );
+                    $("#emotion-list-body").html(tbl_body);
+                }
+            }
+        });
+    };
+</script>
+</body>
+</html>

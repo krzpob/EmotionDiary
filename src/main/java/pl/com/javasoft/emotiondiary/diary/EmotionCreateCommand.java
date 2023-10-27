@@ -1,19 +1,16 @@
-package pl.com.javasoft.EmotionDiary.diary;
+package pl.com.javasoft.emotiondiary.diary;
 
-public class EmotionCommand {
+import org.springframework.lang.NonNull;
 
-    String thinks;
-    String description;
-    int emotion;
-    String behavior;
+import java.util.List;
 
-    public String getThinks() {
-        return thinks;
-    }
+public class EmotionCreateCommand {
 
-    public void setThinks(String thinks) {
-        this.thinks = thinks;
-    }
+    private String description;
+    private int emotion;
+    @NonNull
+    private String behavior;
+
 
     public String getDescription() {
         return description;

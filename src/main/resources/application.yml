@@ -1,12 +1,14 @@
 spring:
   liquibase:
-    change-log: classpath:db/changelog/001-init-changelog.xml
+    change-log: classpath:db/changelog-master.xml
     drop-first: true
     url: jdbc:h2:~/liquibase;DB_CLOSE_ON_EXIT=FALSE
     user: sa
     password:
-  r2dbc:
-    url: r2dbc:h2:file:///~/liquibase;DB_CLOSE_ON_EXIT=FALSE
-    username: sa
-    password:
+
+  datasource:
+    hikari:
+      jdbc-url: jdbc:h2:~/liquibase;DB_CLOSE_ON_EXIT=FALSE
+      username: sa
+
 

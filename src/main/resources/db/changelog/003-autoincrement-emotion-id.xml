@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+        http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+<changeSet id="3" author="krzpob@gmail.com">
+    <modifyDataType tableName="emotions" columnName="id" newDataType="int" />
+    <addAutoIncrement tableName="emotions" columnName="id" columnDataType="int"/>
+</changeSet>
+<changeSet id="3.1" author="krzpob@gmail.com">
+    <dropColumn tableName="emotions" columnName="thinks" />
+</changeSet>
+    <changeSet id="3.2" author="krzpob@gmail.com">
+        <renameColumn tableName="thinks" oldColumnName="qute" newColumnName="quote"/>
+    </changeSet>
+</databaseChangeLog>
