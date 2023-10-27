@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+        http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+    <changeSet id="2" author="krzpob@gmail.com">
+        <createTable tableName="thinks">
+            <column name="id" type="integer"><constraints primaryKey="true"/></column>
+            <column name="emotion_id" type="integer" ><constraints foreignKeyName="emotion_id_fk" referencedTableName="emotions" referencedColumnNames="id"></constraints></column>
+            <column name="qute" type="varchar(500)" />
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
